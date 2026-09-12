@@ -106,6 +106,40 @@ st.markdown(
     .status-not-reached {
         font-weight: 700;
     }
+
+    /* Keep Streamlit KPI values fully visible - never show ... */
+    [data-testid="stMetricValue"] {
+        font-size: 28px !important;
+        line-height: 1.15 !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        letter-spacing: -0.4px !important;
+    }
+
+    [data-testid="stMetric"] {
+        min-width: 0 !important;
+        overflow: visible !important;
+    }
+
+    [data-testid="stMetricValue"] > div {
+        overflow: visible !important;
+        text-overflow: clip !important;
+        white-space: nowrap !important;
+    }
+
+    /* On smaller screens, reduce only the number size so the full amount fits. */
+    @media (max-width: 900px) {
+        [data-testid="stMetricValue"] {
+            font-size: 23px !important;
+        }
+    }
+
+    @media (max-width: 600px) {
+        [data-testid="stMetricValue"] {
+            font-size: 20px !important;
+        }
+    }
     </style>
     """,
     unsafe_allow_html=True
