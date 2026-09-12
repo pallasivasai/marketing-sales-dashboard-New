@@ -620,7 +620,8 @@ def employee_performance_section(
         "Month",
         "Target",
         "Sales",
-        "Achievement %"
+        "Achievement %",
+        "Target Reach"
     ]
 
     pdf = generate_employee_pdf(
