@@ -473,7 +473,8 @@ def employee_performance_section(
         (employee_report["Achievement %"] < 100).sum()
     )
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    # Use wider KPI cards so large currency values are never truncated.
+    c1, c2, c3 = st.columns(3)
 
     c1.metric(
         "🎯 Total Target",
@@ -489,6 +490,8 @@ def employee_performance_section(
         "📊 Achievement",
         f"{overall_achievement:.1f}%"
     )
+
+    c4, c5 = st.columns(2)
 
     c4.metric(
         "🎯 Months Reached",
@@ -1156,7 +1159,8 @@ def dashboard():
 
     st.markdown("### 🎯 Overall Target Status")
 
-    k1, k2, k3, k4 = st.columns(4)
+    # Wider cards keep full currency amounts visible on desktop and mobile.
+    k1, k2 = st.columns(2)
 
     k1.metric(
         "Total Target",
@@ -1167,6 +1171,8 @@ def dashboard():
         "Achieved",
         f"₹ {total_sales:,.0f}"
     )
+
+    k3, k4 = st.columns(2)
 
     k3.metric(
         "Achievement %",
