@@ -163,6 +163,34 @@ def load_excel_cached(file_bytes):
     )
 
 
+# ================= TARGET STATUS HELPER =================
+
+def add_target_status_columns(df, target_col="Target", sales_col="Value"):
+    """Add achievement, gap, and explicit target-reach status dynamically."""
+    out = df.copy()
+    out[target_col] = pd.to_numeric(out[target_col], errors="coerce").fillna(0)
+    out[sales_col] = pd.to_numeric(out[sales_col], errors="coerce").fillna(0)
+
+    out["Achievement %"] = 0.0
+    mask = out[target_col] > 0
+    out.loc[mask, "Achievement %"] = (
+        out.loc[mask, sales_col] / out.loc[mask, target_col] * 100
+    )
+    out["Achievement %"] = out["Achievement %"].round(1)
+
+    out["Target Gap"] = (
+        out[target_col] - out[sales_col]
+    ).clip(lower=0).round(0)
+
+    out["Target Reach"] = out["Achievement %"].apply(
+        lambda x: "YES" if x >= 100 else "NO"
+    )
+
+    out["Target Status"] = out["Achievement %"].apply(
+        lambda x: "✅ TARGET REACHED" if x >= 100 else "❌ NOT REACHED"
+    )
+    return out
+
 # ================= PDF =================
 def generate_employee_pdf(employee_name, employee_df):
 
@@ -230,7 +258,7 @@ def generate_employee_pdf(employee_name, employee_df):
     elements.append(Spacer(1, 20))
 
     detail_data = [
-        ["Month", "Target", "Sales", "Achievement", "Status"]
+        ["Month", "Target", "Sales", "Achievement", "Target Reach", "Status"]
     ]
 
     for _, row in employee_df.iterrows():
@@ -246,6 +274,7 @@ def generate_employee_pdf(employee_name, employee_df):
             f"₹ {row['Target']:,.0f}",
             f"₹ {row['Sales']:,.0f}",
             f"{row['Achievement %']:.1f}%",
+            "YES" if row["Achievement %"] >= 100 else "NO",
             status
         ])
 
@@ -413,6 +442,10 @@ def employee_performance_section(
         else "❌ NOT REACHED"
     )
 
+    employee_report["Target Reach"] = employee_report[
+        "Achievement %"
+    ].apply(lambda x: "YES" if x >= 100 else "NO")
+
     employee_report["Gap"] = (
         employee_report["Target"]
         - employee_report["Value"]
@@ -493,6 +526,7 @@ def employee_performance_section(
             "Value",
             "Achievement %",
             "Gap",
+            "Target Reach",
             "Status"
         ]
     ].copy()
@@ -503,6 +537,7 @@ def employee_performance_section(
         "Sales",
         "Achievement %",
         "Target Gap",
+        "Target Reach",
         "Status"
     ]
 
@@ -578,7 +613,7 @@ def employee_performance_section(
 
     # ---- PDF ----
     pdf_df = employee_report[
-        ["Month_Text", "Target", "Value", "Achievement %"]
+        ["Month_Text", "Target", "Value", "Achievement %", "Target Reach"]
     ].copy()
 
     pdf_df.columns = [
@@ -655,6 +690,12 @@ def employee_ranking_section(sales_df, target_df):
     ranking["Achievement %"] = (
         ranking["Achievement %"]
         .round(1)
+    )
+
+    ranking["Target Reach"] = ranking[
+        "Achievement %"
+    ].apply(
+        lambda x: "YES" if x >= 100 else "NO"
     )
 
     ranking["Status"] = ranking[
@@ -1091,6 +1132,14 @@ def dashboard():
         .round(1)
     )
 
+    monthly_report["Target Gap"] = (
+        monthly_report["Target"] - monthly_report["Value"]
+    ).clip(lower=0).round(0)
+
+    monthly_report["Target Reach"] = monthly_report[
+        "Achievement %"
+    ].apply(lambda x: "YES" if x >= 100 else "NO")
+
     # ================= TARGET STATUS =================
     total_target = monthly_report["Target"].sum()
 
@@ -1165,13 +1214,17 @@ def dashboard():
             "Target",
             "Value",
             "Achievement %",
+            "Target Gap",
+            "Target Reach",
             "Status"
         ]
     ].rename(
         columns={
             "MARK": "Employee",
             "Month_Text": "Month",
-            "Value": "Sales"
+            "Value": "Sales",
+            "Target Gap": "Target Gap",
+            "Target Reach": "Target Reach"
         }
     )
 
