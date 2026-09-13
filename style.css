@@ -1,0 +1,94 @@
+
+/* =========================================================
+   Marketing Sales Dashboard - Premium UI
+   External stylesheet for Streamlit
+   ========================================================= */
+
+.hero {
+    padding: 42px 46px;
+    border-radius: 24px;
+    margin: 10px 0 28px 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
+    color: white;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, .18);
+}
+.hero h1 { font-size: 42px; margin: 0 0 10px 0; letter-spacing: -.8px; }
+.hero p { font-size: 17px; line-height: 1.65; margin: 0; max-width: 900px; opacity: .92; }
+
+.badges { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 9px; }
+.badge {
+    display: inline-block;
+    padding: 7px 13px;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 999px;
+    background: rgba(255,255,255,.10);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.login-card {
+    padding: 30px;
+    border: 1px solid #e2e8f0;
+    border-radius: 22px;
+    background: rgba(255,255,255,.96);
+    box-shadow: 0 15px 40px rgba(15,23,42,.10);
+}
+.login-title { font-size: 27px; font-weight: 750; margin-bottom: 4px; color: #0f172a; }
+.login-subtitle { color: #64748b; margin-bottom: 20px; }
+
+.credential-card {
+    padding: 16px 18px;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    background: #f8fafc;
+    margin-bottom: 10px;
+}
+.credential-role { font-weight: 750; color: #0f172a; margin-bottom: 6px; }
+.credential-line { font-size: 13px; color: #475569; line-height: 1.55; }
+.credential-line code {
+    background: #e2e8f0;
+    padding: 2px 7px;
+    border-radius: 6px;
+    color: #0f172a;
+}
+
+.feature-card {
+    min-height: 125px;
+    padding: 21px;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 8px 25px rgba(15,23,42,.06);
+}
+.feature-icon { font-size: 27px; }
+.feature-title { font-weight: 750; color: #0f172a; margin: 7px 0 4px; }
+.feature-text { font-size: 13px; color: #64748b; line-height: 1.5; }
+
+.section-label {
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 5px;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 28px !important;
+    font-weight: 750 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+[data-testid="stMetric"] {
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 15px;
+    background: white;
+    box-shadow: 0 6px 20px rgba(15,23,42,.05);
+}
+.stButton > button {
+    border-radius: 11px;
+    font-weight: 700;
+    min-height: 44px;
+}
