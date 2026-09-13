@@ -337,50 +337,310 @@ def generate_employee_pdf(employee_name, employee_df):
 # ================= LOGIN =================
 def login():
 
+    # =========================================================
+    # POLISHED LANDING / LOGIN SCREEN
+    # Same clean recruiter-facing style as the dashboard landing page
+    # =========================================================
     st.markdown(
-        '<div class="main-title">🔐 Marketing & Employee Performance Login</div>',
+        """
+        <style>
+        .landing-wrap {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 18px 10px 30px 10px;
+        }
+        .hero-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+            border: 1px solid #e7eaf0;
+            border-radius: 22px;
+            padding: 34px 34px 30px 34px;
+            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
+            margin-bottom: 24px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: #eef4ff;
+            color: #1d4ed8;
+            border: 1px solid #dbe7ff;
+            padding: 7px 13px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+        .hero-title {
+            font-size: 42px;
+            line-height: 1.1;
+            font-weight: 800;
+            color: #111827;
+            margin: 0 0 10px 0;
+        }
+        .hero-subtitle {
+            font-size: 19px;
+            line-height: 1.55;
+            color: #4b5563;
+            margin: 0;
+            max-width: 850px;
+        }
+        .tech-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+        }
+        .tech-chip {
+            padding: 7px 11px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+        .login-card {
+            background: white;
+            border: 1px solid #e7eaf0;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+        }
+        .login-title {
+            font-size: 27px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 4px;
+        }
+        .login-note {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+        .cred-card {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 16px 18px;
+            margin-top: 14px;
+        }
+        .cred-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+        .cred-line {
+            font-size: 14px;
+            color: #4b5563;
+            margin: 4px 0;
+        }
+        .cred-value {
+            font-family: monospace;
+            font-weight: 700;
+            color: #1d4ed8;
+        }
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e7eaf0;
+            border-radius: 16px;
+            padding: 18px;
+            height: 100%;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
+        }
+        .feature-title {
+            font-weight: 800;
+            color: #111827;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        .feature-text {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .github-card {
+            background: #111827;
+            border-radius: 16px;
+            padding: 18px 20px;
+            color: white;
+            margin-top: 6px;
+        }
+        .github-title {
+            font-weight: 800;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .github-text {
+            color: #d1d5db;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        @media (max-width: 700px) {
+            .hero-card { padding: 24px 20px; }
+            .hero-title { font-size: 32px; }
+            .hero-subtitle { font-size: 16px; }
+        }
+        </style>
+        """,
         unsafe_allow_html=True
     )
 
+    st.markdown('<div class="landing-wrap">', unsafe_allow_html=True)
+
+    # Hero section
     st.markdown(
-        '<div class="sub-title">Secure role-based dashboard access</div>',
+        """
+        <div class="hero-card">
+            <div class="hero-badge">📊 DATA ANALYTICS • SALES PERFORMANCE</div>
+            <div class="hero-title">Marketing Sales & Employee Performance Dashboard</div>
+            <div class="hero-subtitle">
+                Interactive dashboard for monitoring sales, employee targets,
+                achievement trends, customer performance, brand-wise sales,
+                and management reporting.
+            </div>
+            <div class="tech-row">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">Streamlit</span>
+                <span class="tech-chip">Pandas</span>
+                <span class="tech-chip">Excel Analytics</span>
+                <span class="tech-chip">PDF Reporting</span>
+                <span class="tech-chip">Role-Based Access</span>
+            </div>
+        </div>
+        """,
         unsafe_allow_html=True
     )
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    left, right = st.columns([1.35, 1])
 
-    with col2:
+    with left:
+        st.markdown('<div class="login-card">', unsafe_allow_html=True)
+        st.markdown('<div class="login-title">🔐 Secure Login</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="login-note">Sign in to access the dashboard based on your role.</div>',
+            unsafe_allow_html=True
+        )
 
         username = st.text_input(
             "Username",
-            placeholder="Enter username"
+            placeholder="Enter username",
+            key="sales_login_username"
         )
 
         password = st.text_input(
             "Password",
             type="password",
-            placeholder="Enter password"
+            placeholder="Enter password",
+            key="sales_login_password"
         )
 
-        if st.button(
-            "🔓 Login",
-            use_container_width=True
-        ):
+        if st.button("🚀 Login", use_container_width=True, type="primary"):
 
             if (
                 username in USERS
                 and USERS[username]["password"] == password
             ):
-
                 st.session_state["user"] = username
                 st.session_state["marketing"] = USERS[username]["marketing"]
                 st.session_state["role"] = USERS[username]["role"]
-
                 st.rerun()
-
             else:
-
                 st.error("Invalid username or password.")
+
+        # Requested credentials display — do not remove this feature.
+        st.markdown(
+            """
+            <div class="cred-card">
+                <div class="cred-title">👨‍💼 Administrator / HR</div>
+                <div class="cred-line">Username: <span class="cred-value">admin</span></div>
+                <div class="cred-line">Password: <span class="cred-value">admin@123</span></div>
+            </div>
+
+            <div class="cred-card">
+                <div class="cred-title">👤 Marketing Employee — Ashok</div>
+                <div class="cred-line">Username: <span class="cred-value">ashok</span></div>
+                <div class="cred-line">Password: <span class="cred-value">ashok@123</span></div>
+            </div>
+
+            <div class="cred-card">
+                <div class="cred-title">👤 Marketing Employee — Suresh</div>
+                <div class="cred-line">Username: <span class="cred-value">suresh</span></div>
+                <div class="cred-line">Password: <span class="cred-value">suresh@123</span></div>
+            </div>
+
+            <div class="cred-card">
+                <div class="cred-title">👤 Marketing Employee — H O</div>
+                <div class="cred-line">Username: <span class="cred-value">ho</span></div>
+                <div class="cred-line">Password: <span class="cred-value">ho@123</span></div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with right:
+        st.markdown(
+            """
+            <div class="feature-card">
+                <div class="feature-title">🎯 Employee Target Tracking</div>
+                <div class="feature-text">
+                    Compare monthly targets with actual sales, achievement percentage,
+                    target gap, and target-reach status.
+                </div>
+            </div>
+            <br>
+            <div class="feature-card">
+                <div class="feature-title">📈 Performance Analytics</div>
+                <div class="feature-text">
+                    Review monthly trends, employee rankings, achievement charts,
+                    and performance summaries.
+                </div>
+            </div>
+            <br>
+            <div class="feature-card">
+                <div class="feature-title">👥 Customer & Brand Insights</div>
+                <div class="feature-text">
+                    Analyze new customers, customer sales, and brand-wise performance
+                    from the Excel data.
+                </div>
+            </div>
+            <br>
+            <div class="feature-card">
+                <div class="feature-title">📄 Management Reports</div>
+                <div class="feature-text">
+                    Generate employee and overall performance reports as PDF files.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown(
+            """
+            <div class="github-card">
+                <div class="github-title">💻 Project on GitHub</div>
+                <div class="github-text">
+                    Source code and project files are maintained in the GitHub repository.
+                    The dashboard can use the Excel workbook as its data source.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.link_button(
+            "🔗 Open GitHub Repository",
+            "https://github.com/pallasivasai/marketing-sales-dashboard-New",
+            use_container_width=True
+        )
+
+        st.link_button(
+            "📥 Download / View Excel Data File",
+            "https://github.com/pallasivasai/marketing-sales-dashboard-New/blob/main/Marketing_Sales_Dashboard_Data.xlsx",
+            use_container_width=True
+        )
+
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
 # ================= EMPLOYEE PERFORMANCE =================
