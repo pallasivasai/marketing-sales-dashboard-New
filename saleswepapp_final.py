@@ -336,209 +336,53 @@ def generate_employee_pdf(employee_name, employee_df):
 
 # ================= LOGIN =================
 def login():
-
-    # =========================================================
-    # POLISHED LANDING / LOGIN SCREEN
-    # Same clean recruiter-facing style as the dashboard landing page
-    # =========================================================
+    """Portfolio-quality landing page + secure login. Existing credentials are intentionally visible for demo use."""
     st.markdown(
         """
         <style>
-        .landing-wrap {
-            max-width: 1050px;
-            margin: 0 auto;
-            padding: 18px 10px 30px 10px;
-        }
-        .hero-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-            border: 1px solid #e7eaf0;
-            border-radius: 22px;
-            padding: 34px 34px 30px 34px;
-            box-shadow: 0 10px 35px rgba(15, 23, 42, 0.08);
-            margin-bottom: 24px;
-        }
-        .hero-badge {
-            display: inline-block;
-            background: #eef4ff;
-            color: #1d4ed8;
-            border: 1px solid #dbe7ff;
-            padding: 7px 13px;
-            border-radius: 999px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
-        .hero-title {
-            font-size: 42px;
-            line-height: 1.1;
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 10px 0;
-        }
-        .hero-subtitle {
-            font-size: 19px;
-            line-height: 1.55;
-            color: #4b5563;
-            margin: 0;
-            max-width: 850px;
-        }
-        .tech-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-top: 18px;
-        }
-        .tech-chip {
-            padding: 7px 11px;
-            background: #f3f4f6;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #374151;
-            border: 1px solid #e5e7eb;
-        }
-        .login-card {
-            background: white;
-            border: 1px solid #e7eaf0;
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
-        }
-        .login-title {
-            font-size: 27px;
-            font-weight: 800;
-            color: #111827;
-            margin-bottom: 4px;
-        }
-        .login-note {
-            color: #6b7280;
-            font-size: 14px;
-            margin-bottom: 18px;
-        }
-        .cred-card {
-            background: #f8fafc;
-            border: 1px solid #e5e7eb;
-            border-radius: 14px;
-            padding: 16px 18px;
-            margin-top: 14px;
-        }
-        .cred-title {
-            font-size: 15px;
-            font-weight: 800;
-            color: #111827;
-            margin-bottom: 8px;
-        }
-        .cred-line {
-            font-size: 14px;
-            color: #4b5563;
-            margin: 4px 0;
-        }
-        .cred-value {
-            font-family: monospace;
-            font-weight: 700;
-            color: #1d4ed8;
-        }
-        .feature-card {
-            background: #ffffff;
-            border: 1px solid #e7eaf0;
-            border-radius: 16px;
-            padding: 18px;
-            height: 100%;
-            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
-        }
-        .feature-title {
-            font-weight: 800;
-            color: #111827;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-        .feature-text {
-            color: #6b7280;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        .github-card {
-            background: #111827;
-            border-radius: 16px;
-            padding: 18px 20px;
-            color: white;
-            margin-top: 6px;
-        }
-        .github-title {
-            font-weight: 800;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-        .github-text {
-            color: #d1d5db;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-        @media (max-width: 700px) {
-            .hero-card { padding: 24px 20px; }
-            .hero-title { font-size: 32px; }
-            .hero-subtitle { font-size: 16px; }
-        }
+        .portfolio-shell{max-width:1180px;margin:0 auto;padding:18px 10px 42px}
+        .hero{border:1px solid #e7eaf0;border-radius:24px;padding:34px 38px;background:linear-gradient(135deg,#ffffff 0%,#f7faff 58%,#eef5ff 100%);box-shadow:0 16px 45px rgba(15,23,42,.08);position:relative;overflow:hidden}
+        .hero:after{content:'↗';position:absolute;right:34px;top:20px;font-size:110px;font-weight:900;color:rgba(37,99,235,.06)}
+        .badge{display:inline-block;padding:7px 12px;border-radius:999px;background:#eaf2ff;border:1px solid #d7e6ff;color:#1559b7;font-size:12px;font-weight:800;letter-spacing:.5px}
+        .hero h1{font-size:44px;line-height:1.08;margin:14px 0 10px;color:#111827;font-weight:850;max-width:850px}
+        .hero p{font-size:17px;line-height:1.65;color:#5b6472;max-width:820px;margin:0}
+        .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.chip{padding:7px 11px;border:1px solid #e1e6ef;border-radius:9px;background:#fff;color:#374151;font-size:12px;font-weight:700}
+        .section-label{font-size:12px;font-weight:800;color:#6b7280;letter-spacing:.7px;text-transform:uppercase;margin:26px 0 10px}
+        .login-panel,.feature-panel{border:1px solid #e7eaf0;border-radius:20px;background:#fff;box-shadow:0 10px 32px rgba(15,23,42,.055);padding:24px}
+        .panel-title{font-size:24px;font-weight:850;color:#111827;margin-bottom:4px}.panel-sub{font-size:13px;color:#6b7280;margin-bottom:18px}
+        .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.cred{border:1px solid #e7eaf0;background:#f8fafc;border-radius:13px;padding:13px}.cred b{display:block;font-size:13px;color:#111827;margin-bottom:6px}.cred span{font:700 12px ui-monospace,SFMono-Regular,Consolas,monospace;color:#1559b7}
+        .feature{border:1px solid #e7eaf0;border-radius:14px;padding:15px;margin-bottom:10px;background:#fbfcfe}.feature:last-child{margin-bottom:0}.feature b{font-size:14px;color:#111827}.feature p{font-size:12px;line-height:1.5;color:#6b7280;margin:5px 0 0}
+        .repo{margin-top:10px;border-radius:15px;background:#111827;color:#fff;padding:17px}.repo b{font-size:15px}.repo p{font-size:12px;color:#cbd5e1;margin:5px 0 0}
+        @media(max-width:750px){.hero{padding:25px 22px}.hero h1{font-size:32px}.cred-grid{grid-template-columns:1fr}}
         </style>
-        """,
-        unsafe_allow_html=True
+        """, unsafe_allow_html=True
     )
 
-    st.markdown('<div class="landing-wrap">', unsafe_allow_html=True)
-
-    # Hero section
+    st.markdown('<div class="portfolio-shell">', unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="hero-card">
-            <div class="hero-badge">📊 DATA ANALYTICS • SALES PERFORMANCE</div>
-            <div class="hero-title">Marketing Sales & Employee Performance Dashboard</div>
-            <div class="hero-subtitle">
-                Interactive dashboard for monitoring sales, employee targets,
-                achievement trends, customer performance, brand-wise sales,
-                and management reporting.
-            </div>
-            <div class="tech-row">
-                <span class="tech-chip">Python</span>
-                <span class="tech-chip">Streamlit</span>
-                <span class="tech-chip">Pandas</span>
-                <span class="tech-chip">Excel Analytics</span>
-                <span class="tech-chip">PDF Reporting</span>
-                <span class="tech-chip">Role-Based Access</span>
+        <div class="hero">
+            <span class="badge">📊 SALES ANALYTICS • PERFORMANCE MANAGEMENT</span>
+            <h1>Marketing Sales & Employee Performance Dashboard</h1>
+            <p>Interactive business dashboard for sales monitoring, employee target tracking, achievement analysis, customer insights, brand performance and management reporting.</p>
+            <div class="chips">
+                <span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">Pandas</span>
+                <span class="chip">Excel Analytics</span><span class="chip">Role-Based Access</span><span class="chip">PDF Reports</span>
             </div>
         </div>
-        """,
-        unsafe_allow_html=True
+        """, unsafe_allow_html=True
     )
 
-    left, right = st.columns([1.35, 1])
+    st.markdown('<div class="section-label">Dashboard Access</div>', unsafe_allow_html=True)
+    left, right = st.columns([1.15, 1], gap="large")
 
     with left:
-        st.markdown('<div class="login-card">', unsafe_allow_html=True)
-        st.markdown('<div class="login-title">🔐 Secure Login</div>', unsafe_allow_html=True)
-        st.markdown(
-            '<div class="login-note">Sign in to access the dashboard based on your role.</div>',
-            unsafe_allow_html=True
-        )
-
-        username = st.text_input(
-            "Username",
-            placeholder="Enter username",
-            key="sales_login_username"
-        )
-
-        password = st.text_input(
-            "Password",
-            type="password",
-            placeholder="Enter password",
-            key="sales_login_password"
-        )
-
-        if st.button("🚀 Login", use_container_width=True, type="primary"):
-
-            if (
-                username in USERS
-                and USERS[username]["password"] == password
-            ):
+        st.markdown('<div class="login-panel">', unsafe_allow_html=True)
+        st.markdown('<div class="panel-title">🔐 Secure Login</div><div class="panel-sub">Use a demo account below to explore role-based dashboard access.</div>', unsafe_allow_html=True)
+        username = st.text_input("Username", placeholder="Enter username", key="sales_login_username")
+        password = st.text_input("Password", type="password", placeholder="Enter password", key="sales_login_password")
+        if st.button("🚀 Login to Dashboard", use_container_width=True, type="primary"):
+            if username in USERS and USERS[username]["password"] == password:
                 st.session_state["user"] = username
                 st.session_state["marketing"] = USERS[username]["marketing"]
                 st.session_state["role"] = USERS[username]["role"]
@@ -546,101 +390,38 @@ def login():
             else:
                 st.error("Invalid username or password.")
 
-        # Requested credentials display — do not remove this feature.
+        st.markdown('<div class="section-label">Demo Credentials</div>', unsafe_allow_html=True)
         st.markdown(
             """
-            <div class="cred-card">
-                <div class="cred-title">👨‍💼 Administrator / HR</div>
-                <div class="cred-line">Username: <span class="cred-value">admin</span></div>
-                <div class="cred-line">Password: <span class="cred-value">admin@123</span></div>
+            <div class="cred-grid">
+              <div class="cred"><b>👨‍💼 Administrator / HR</b><span>admin</span><br><span>admin@123</span></div>
+              <div class="cred"><b>👤 Ashok — Marketing</b><span>ashok</span><br><span>ashok@123</span></div>
+              <div class="cred"><b>👤 Suresh — Marketing</b><span>suresh</span><br><span>suresh@123</span></div>
+              <div class="cred"><b>👤 H O — Marketing</b><span>ho</span><br><span>ho@123</span></div>
             </div>
-
-            <div class="cred-card">
-                <div class="cred-title">👤 Marketing Employee — Ashok</div>
-                <div class="cred-line">Username: <span class="cred-value">ashok</span></div>
-                <div class="cred-line">Password: <span class="cred-value">ashok@123</span></div>
-            </div>
-
-            <div class="cred-card">
-                <div class="cred-title">👤 Marketing Employee — Suresh</div>
-                <div class="cred-line">Username: <span class="cred-value">suresh</span></div>
-                <div class="cred-line">Password: <span class="cred-value">suresh@123</span></div>
-            </div>
-
-            <div class="cred-card">
-                <div class="cred-title">👤 Marketing Employee — H O</div>
-                <div class="cred-line">Username: <span class="cred-value">ho</span></div>
-                <div class="cred-line">Password: <span class="cred-value">ho@123</span></div>
-            </div>
-            """,
-            unsafe_allow_html=True
+            """, unsafe_allow_html=True
         )
-
         st.markdown('</div>', unsafe_allow_html=True)
 
     with right:
+        st.markdown('<div class="feature-panel">', unsafe_allow_html=True)
+        st.markdown('<div class="panel-title">✨ What You Can Analyze</div><div class="panel-sub">Built as a practical, recruiter-friendly analytics project.</div>', unsafe_allow_html=True)
         st.markdown(
             """
-            <div class="feature-card">
-                <div class="feature-title">🎯 Employee Target Tracking</div>
-                <div class="feature-text">
-                    Compare monthly targets with actual sales, achievement percentage,
-                    target gap, and target-reach status.
-                </div>
-            </div>
-            <br>
-            <div class="feature-card">
-                <div class="feature-title">📈 Performance Analytics</div>
-                <div class="feature-text">
-                    Review monthly trends, employee rankings, achievement charts,
-                    and performance summaries.
-                </div>
-            </div>
-            <br>
-            <div class="feature-card">
-                <div class="feature-title">👥 Customer & Brand Insights</div>
-                <div class="feature-text">
-                    Analyze new customers, customer sales, and brand-wise performance
-                    from the Excel data.
-                </div>
-            </div>
-            <br>
-            <div class="feature-card">
-                <div class="feature-title">📄 Management Reports</div>
-                <div class="feature-text">
-                    Generate employee and overall performance reports as PDF files.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
+            <div class="feature"><b>🎯 Target vs Actual</b><p>Monthly targets, achieved sales, achievement percentage, gap and target-reach status.</p></div>
+            <div class="feature"><b>🏆 Employee Performance</b><p>Employee ranking, monthly performance trends and detailed performance reports.</p></div>
+            <div class="feature"><b>👥 Customer & Brand Insights</b><p>New customer reporting and brand-wise sales analysis from Excel data.</p></div>
+            <div class="feature"><b>📄 Management Reporting</b><p>Generate downloadable employee and overall performance PDF reports.</p></div>
+            <div class="repo"><b>💻 Open Source Project</b><p>Source code and project files are maintained in the GitHub repository.</p></div>
+            """, unsafe_allow_html=True
         )
+        st.markdown('</div>', unsafe_allow_html=True)
+        st.markdown('<div style="height:10px"></div>', unsafe_allow_html=True)
+        st.link_button("🔗 Open GitHub Repository", "https://github.com/pallasivasai/marketing-sales-dashboard-New", use_container_width=True)
+        st.link_button("📥 Download / View Excel Data File", "https://github.com/pallasivasai/marketing-sales-dashboard-New/blob/main/Marketing_Sales_Dashboard_Data.xlsx", use_container_width=True)
 
-        st.markdown(
-            """
-            <div class="github-card">
-                <div class="github-title">💻 Project on GitHub</div>
-                <div class="github-text">
-                    Source code and project files are maintained in the GitHub repository.
-                    The dashboard can use the Excel workbook as its data source.
-                </div>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-
-        st.link_button(
-            "🔗 Open GitHub Repository",
-            "https://github.com/pallasivasai/marketing-sales-dashboard-New",
-            use_container_width=True
-        )
-
-        st.link_button(
-            "📥 Download / View Excel Data File",
-            "https://github.com/pallasivasai/marketing-sales-dashboard-New/blob/main/Marketing_Sales_Dashboard_Data.xlsx",
-            use_container_width=True
-        )
-
-    st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown('<div style="text-align:center;color:#9ca3af;font-size:12px;margin-top:26px">Marketing Sales Dashboard • Demo / Portfolio Application</div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ================= EMPLOYEE PERFORMANCE =================
