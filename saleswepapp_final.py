@@ -347,9 +347,11 @@ def login():
         unsafe_allow_html=True
     )
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    # Credentials are intentionally placed first on the left.
+    # Excel download is separated on the right so users can login quickly.
+    left_col, right_col = st.columns([2, 1], gap="large")
 
-    with col2:
+    with left_col:
 
         username = st.text_input(
             "Username",
@@ -382,6 +384,7 @@ def login():
 
                 st.error("Invalid username or password.")
 
+        # ================= DEMO LOGIN CREDENTIALS =================
         st.info(
             """
             **🔐 Demo Login Credentials**
@@ -404,22 +407,23 @@ def login():
             """
         )
 
-        # ================= EXCEL DOWNLOAD LINK =================
-        st.markdown("---")
-        st.markdown("### 📥 Project Excel Data")
+    with right_col:
 
-        excel_url = (
-            "https://github.com/pallasivasai/marketing-sales-dashboard-New/"
-            "blob/main/Marketing_Sales_Dashboard_Data_With_Ramu.xlsx"
-        )
+        # ================= EXCEL DOWNLOAD LINK =================
+        st.markdown("### 📥 Project Excel Data")
 
         st.markdown(
             "Download the project Excel file, then upload it using the "
             "**Upload Excel Data** option in the sidebar."
         )
 
+        excel_url = (
+            "https://github.com/pallasivasai/marketing-sales-dashboard-New/"
+            "blob/main/Marketing_Sales_Dashboard_Data_With_Ramu.xlsx"
+        )
+
         st.link_button(
-            "📥 Download Marketing Sales Dashboard Excel",
+            "📥 Download Excel",
             excel_url,
             use_container_width=True
         )
