@@ -359,26 +359,6 @@ def generate_employee_pdf(employee_name, employee_df):
 # ================= LOGIN =================
 def login():
     """Portfolio-quality landing page + secure login. Existing credentials are intentionally visible for demo use."""
-    st.markdown(
-        """
-        <style>
-        .portfolio-shell{max-width:1180px;margin:0 auto;padding:18px 10px 42px}
-        .hero{border:1px solid #e7eaf0;border-radius:24px;padding:34px 38px;background:linear-gradient(135deg,#ffffff 0%,#f7faff 58%,#eef5ff 100%);box-shadow:0 16px 45px rgba(15,23,42,.08);position:relative;overflow:hidden}
-        .hero:after{content:'↗';position:absolute;right:34px;top:20px;font-size:110px;font-weight:900;color:rgba(37,99,235,.06)}
-        .badge{display:inline-block;padding:7px 12px;border-radius:999px;background:#eaf2ff;border:1px solid #d7e6ff;color:#1559b7;font-size:12px;font-weight:800;letter-spacing:.5px}
-        .hero h1{font-size:44px;line-height:1.08;margin:14px 0 10px;color:#111827;font-weight:850;max-width:850px}
-        .hero p{font-size:17px;line-height:1.65;color:#5b6472;max-width:820px;margin:0}
-        .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}.chip{padding:7px 11px;border:1px solid #e1e6ef;border-radius:9px;background:#fff;color:#374151;font-size:12px;font-weight:700}
-        .section-label{font-size:12px;font-weight:800;color:#6b7280;letter-spacing:.7px;text-transform:uppercase;margin:26px 0 10px}
-        .login-panel,.feature-panel{border:1px solid #e7eaf0;border-radius:20px;background:#fff;box-shadow:0 10px 32px rgba(15,23,42,.055);padding:24px}
-        .panel-title{font-size:24px;font-weight:850;color:#111827;margin-bottom:4px}.panel-sub{font-size:13px;color:#6b7280;margin-bottom:18px}
-        .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}.cred{border:1px solid #e7eaf0;background:#f8fafc;border-radius:13px;padding:13px}.cred b{display:block;font-size:13px;color:#111827;margin-bottom:6px}.cred span{font:700 12px ui-monospace,SFMono-Regular,Consolas,monospace;color:#1559b7}
-        .feature{border:1px solid #e7eaf0;border-radius:14px;padding:15px;margin-bottom:10px;background:#fbfcfe}.feature:last-child{margin-bottom:0}.feature b{font-size:14px;color:#111827}.feature p{font-size:12px;line-height:1.5;color:#6b7280;margin:5px 0 0}
-        .repo{margin-top:10px;border-radius:15px;background:#111827;color:#fff;padding:17px}.repo b{font-size:15px}.repo p{font-size:12px;color:#cbd5e1;margin:5px 0 0}
-        @media(max-width:750px){.hero{padding:25px 22px}.hero h1{font-size:32px}.cred-grid{grid-template-columns:1fr}}
-        </style>
-        """, unsafe_allow_html=True
-    )
 
     st.markdown('<div class="portfolio-shell">', unsafe_allow_html=True)
     st.markdown(
