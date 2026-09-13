@@ -27,28 +27,6 @@ st.set_page_config(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.path.join(BASE_DIR, "fonts")
 
-# ================= EXTERNAL CSS =================
-CSS_URL = "https://raw.githubusercontent.com/pallasivasai/marketing-sales-dashboard-New/main/style.css"
-
-def load_external_css():
-    css_text = None
-    try:
-        import requests
-        response = requests.get(CSS_URL, timeout=5)
-        response.raise_for_status()
-        css_text = response.text
-    except Exception:
-        local_css = os.path.join(BASE_DIR, "style.css")
-        if os.path.exists(local_css):
-            with open(local_css, "r", encoding="utf-8") as f:
-                css_text = f.read()
-
-    if css_text:
-        st.markdown(f"<style>{css_text}</style>", unsafe_allow_html=True)
-
-load_external_css()
-
-
 try:
     pdfmetrics.registerFont(
         TTFont("DejaVu", os.path.join(FONT_DIR, "DejaVuSans.ttf"))
@@ -358,72 +336,74 @@ def generate_employee_pdf(employee_name, employee_df):
 
 # ================= LOGIN =================
 def login():
-    """Portfolio-quality landing page + secure login. Existing credentials are intentionally visible for demo use."""
 
-    st.markdown('<div class="portfolio-shell">', unsafe_allow_html=True)
     st.markdown(
-        """
-        <div class="hero">
-            <span class="badge">📊 SALES ANALYTICS • PERFORMANCE MANAGEMENT</span>
-            <h1>Marketing Sales & Employee Performance Dashboard</h1>
-            <p>Interactive business dashboard for sales monitoring, employee target tracking, achievement analysis, customer insights, brand performance and management reporting.</p>
-            <div class="chips">
-                <span class="chip">Python</span><span class="chip">Streamlit</span><span class="chip">Pandas</span>
-                <span class="chip">Excel Analytics</span><span class="chip">Role-Based Access</span><span class="chip">PDF Reports</span>
-            </div>
-        </div>
-        """, unsafe_allow_html=True
+        '<div class="main-title">🔐 Marketing & Employee Performance Login</div>',
+        unsafe_allow_html=True
     )
 
-    st.markdown('<div class="section-label">Dashboard Access</div>', unsafe_allow_html=True)
-    left, right = st.columns([1.15, 1], gap="large")
+    st.markdown(
+        '<div class="sub-title">Secure role-based dashboard access</div>',
+        unsafe_allow_html=True
+    )
 
-    with left:
-        st.markdown('<div class="login-panel">', unsafe_allow_html=True)
-        st.markdown('<div class="panel-title">🔐 Secure Login</div><div class="panel-sub">Use a demo account below to explore role-based dashboard access.</div>', unsafe_allow_html=True)
-        username = st.text_input("Username", placeholder="Enter username", key="sales_login_username")
-        password = st.text_input("Password", type="password", placeholder="Enter password", key="sales_login_password")
-        if st.button("🚀 Login to Dashboard", use_container_width=True, type="primary"):
-            if username in USERS and USERS[username]["password"] == password:
+    col1, col2, col3 = st.columns([1, 2, 1])
+
+    with col2:
+
+        username = st.text_input(
+            "Username",
+            placeholder="Enter username"
+        )
+
+        password = st.text_input(
+            "Password",
+            type="password",
+            placeholder="Enter password"
+        )
+
+        if st.button(
+            "🔓 Login",
+            use_container_width=True
+        ):
+
+            if (
+                username in USERS
+                and USERS[username]["password"] == password
+            ):
+
                 st.session_state["user"] = username
                 st.session_state["marketing"] = USERS[username]["marketing"]
                 st.session_state["role"] = USERS[username]["role"]
+
                 st.rerun()
+
             else:
+
                 st.error("Invalid username or password.")
 
-        st.markdown('<div class="section-label">Demo Credentials</div>', unsafe_allow_html=True)
-        st.markdown(
+        # ================= DEMO LOGIN CREDENTIALS =================
+        st.info(
             """
-            <div class="cred-grid">
-              <div class="cred"><b>👨‍💼 Administrator / HR</b><span>admin</span><br><span>admin@123</span></div>
-              <div class="cred"><b>👤 Ashok — Marketing</b><span>ashok</span><br><span>ashok@123</span></div>
-              <div class="cred"><b>👤 Suresh — Marketing</b><span>suresh</span><br><span>suresh@123</span></div>
-              <div class="cred"><b>👤 H O — Marketing</b><span>ho</span><br><span>ho@123</span></div>
-            </div>
-            """, unsafe_allow_html=True
-        )
-        st.markdown('</div>', unsafe_allow_html=True)
+            **🔐 Demo Login Credentials**
 
-    with right:
-        st.markdown('<div class="feature-panel">', unsafe_allow_html=True)
-        st.markdown('<div class="panel-title">✨ What You Can Analyze</div><div class="panel-sub">Built as a practical, recruiter-friendly analytics project.</div>', unsafe_allow_html=True)
-        st.markdown(
+            **Administrator / HR**
+            - Username: `admin`
+            - Password: `admin@123`
+
+            **Marketing Employee — Ashok**
+            - Username: `ashok`
+            - Password: `ashok@123`
+
+            **Marketing Employee — Suresh**
+            - Username: `suresh`
+            - Password: `suresh@123`
+
+            **Marketing Employee — H O**
+            - Username: `ho`
+            - Password: `ho@123`
             """
-            <div class="feature"><b>🎯 Target vs Actual</b><p>Monthly targets, achieved sales, achievement percentage, gap and target-reach status.</p></div>
-            <div class="feature"><b>🏆 Employee Performance</b><p>Employee ranking, monthly performance trends and detailed performance reports.</p></div>
-            <div class="feature"><b>👥 Customer & Brand Insights</b><p>New customer reporting and brand-wise sales analysis from Excel data.</p></div>
-            <div class="feature"><b>📄 Management Reporting</b><p>Generate downloadable employee and overall performance PDF reports.</p></div>
-            <div class="repo"><b>💻 Open Source Project</b><p>Source code and project files are maintained in the GitHub repository.</p></div>
-            """, unsafe_allow_html=True
         )
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown('<div style="height:10px"></div>', unsafe_allow_html=True)
-        st.link_button("🔗 Open GitHub Repository", "https://github.com/pallasivasai/marketing-sales-dashboard-New", use_container_width=True)
-        st.link_button("📥 Download / View Excel Data File", "https://github.com/pallasivasai/marketing-sales-dashboard-New/blob/main/Marketing_Sales_Dashboard_Data.xlsx", use_container_width=True)
-
-    st.markdown('<div style="text-align:center;color:#9ca3af;font-size:12px;margin-top:26px">Marketing Sales Dashboard • Demo / Portfolio Application</div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
 
 
 # ================= EMPLOYEE PERFORMANCE =================
