@@ -27,6 +27,28 @@ st.set_page_config(
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FONT_DIR = os.path.join(BASE_DIR, "fonts")
 
+# ================= EXTERNAL CSS =================
+CSS_URL = "https://raw.githubusercontent.com/pallasivasai/marketing-sales-dashboard-New/main/style.css"
+
+def load_external_css():
+    css_text = None
+    try:
+        import requests
+        response = requests.get(CSS_URL, timeout=5)
+        response.raise_for_status()
+        css_text = response.text
+    except Exception:
+        local_css = os.path.join(BASE_DIR, "style.css")
+        if os.path.exists(local_css):
+            with open(local_css, "r", encoding="utf-8") as f:
+                css_text = f.read()
+
+    if css_text:
+        st.markdown(f"<style>{css_text}</style>", unsafe_allow_html=True)
+
+load_external_css()
+
+
 try:
     pdfmetrics.registerFont(
         TTFont("DejaVu", os.path.join(FONT_DIR, "DejaVuSans.ttf"))
