@@ -382,7 +382,6 @@ def login():
 
                 st.error("Invalid username or password.")
 
-        # ================= DEMO LOGIN CREDENTIALS =================
         st.info(
             """
             **🔐 Demo Login Credentials**
@@ -403,6 +402,26 @@ def login():
             - Username: `ho`
             - Password: `ho@123`
             """
+        )
+
+        # ================= EXCEL DOWNLOAD LINK =================
+        st.markdown("---")
+        st.markdown("### 📥 Project Excel Data")
+
+        excel_url = (
+            "https://github.com/pallasivasai/marketing-sales-dashboard-New/"
+            "blob/main/Marketing_Sales_Dashboard_Data_With_Ramu.xlsx"
+        )
+
+        st.markdown(
+            "Download the project Excel file, then upload it using the "
+            "**Upload Excel Data** option in the sidebar."
+        )
+
+        st.link_button(
+            "📥 Download Marketing Sales Dashboard Excel",
+            excel_url,
+            use_container_width=True
         )
 
 
