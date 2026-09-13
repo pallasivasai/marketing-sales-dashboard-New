@@ -1,94 +1,394 @@
 
 /* =========================================================
-   Marketing Sales Dashboard - Premium UI
-   External stylesheet for Streamlit
+   MARKETING SALES DASHBOARD — PREMIUM PORTFOLIO UI
+   Hosted separately as style.css
    ========================================================= */
 
+/* ---------- Global layout: remove Streamlit's huge top gap ---------- */
+[data-testid="stAppViewContainer"] .main .block-container {
+    max-width: 1280px !important;
+    padding-top: 1.15rem !important;
+    padding-bottom: 2.5rem !important;
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+}
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+}
+
+[data-testid="stToolbar"] {
+    visibility: visible;
+}
+
+.stApp {
+    background:
+        radial-gradient(circle at 10% 0%, rgba(37,99,235,.055), transparent 28%),
+        radial-gradient(circle at 95% 15%, rgba(14,165,233,.045), transparent 25%),
+        #f8fafc;
+}
+
+/* ---------- Portfolio shell ---------- */
+.portfolio-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 0 36px;
+}
+
+/* ---------- Hero ---------- */
 .hero {
-    padding: 42px 46px;
-    border-radius: 24px;
-    margin: 10px 0 28px 0;
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #2563eb 100%);
-    color: white;
-    box-shadow: 0 18px 45px rgba(15, 23, 42, .18);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #dbe5f2;
+    border-radius: 26px;
+    padding: 38px 42px 34px;
+    margin: 0 0 24px;
+    background:
+        radial-gradient(circle at 88% 20%, rgba(96,165,250,.16), transparent 24%),
+        linear-gradient(135deg, #ffffff 0%, #f7faff 52%, #edf5ff 100%);
+    box-shadow: 0 20px 55px rgba(15,23,42,.08);
 }
-.hero h1 { font-size: 42px; margin: 0 0 10px 0; letter-spacing: -.8px; }
-.hero p { font-size: 17px; line-height: 1.65; margin: 0; max-width: 900px; opacity: .92; }
 
-.badges { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 9px; }
+.hero:before {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -90px;
+    bottom: -130px;
+    border-radius: 50%;
+    border: 1px solid rgba(37,99,235,.10);
+    box-shadow:
+        0 0 0 30px rgba(37,99,235,.025),
+        0 0 0 60px rgba(37,99,235,.018);
+}
+
+.hero:after {
+    content: "↗";
+    position: absolute;
+    right: 38px;
+    top: 22px;
+    font-size: 118px;
+    line-height: 1;
+    font-weight: 900;
+    color: rgba(37,99,235,.055);
+}
+
+.hero h1 {
+    position: relative;
+    z-index: 2;
+    max-width: 920px;
+    margin: 15px 0 12px;
+    color: #0f172a;
+    font-size: clamp(32px, 4.1vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -1.35px;
+    font-weight: 850;
+}
+
+.hero p {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    margin: 0;
+    color: #64748b;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
 .badge {
-    display: inline-block;
-    padding: 7px 13px;
-    border: 1px solid rgba(255,255,255,.25);
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 13px;
+    border: 1px solid #cfe0ff;
     border-radius: 999px;
-    background: rgba(255,255,255,.10);
-    font-size: 13px;
-    font-weight: 600;
+    background: rgba(239,246,255,.86);
+    color: #1859ad;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .65px;
 }
 
-.login-card {
-    padding: 30px;
+.chips {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 22px;
+}
+
+.chip {
+    padding: 8px 12px;
+    border: 1px solid #dbe3ee;
+    border-radius: 10px;
+    background: rgba(255,255,255,.88);
+    color: #334155;
+    font-size: 12px;
+    font-weight: 750;
+    box-shadow: 0 3px 10px rgba(15,23,42,.025);
+}
+
+/* ---------- Section labels ---------- */
+.section-label {
+    margin: 22px 0 10px;
+    color: #2563eb;
+    font-size: 11px;
+    font-weight: 850;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+}
+
+/* ---------- Panels ---------- */
+.login-panel,
+.feature-panel {
+    height: 100%;
     border: 1px solid #e2e8f0;
-    border-radius: 22px;
-    background: rgba(255,255,255,.96);
-    box-shadow: 0 15px 40px rgba(15,23,42,.10);
+    border-radius: 21px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 12px 36px rgba(15,23,42,.065);
+    padding: 25px;
 }
-.login-title { font-size: 27px; font-weight: 750; margin-bottom: 4px; color: #0f172a; }
-.login-subtitle { color: #64748b; margin-bottom: 20px; }
 
-.credential-card {
-    padding: 16px 18px;
+.panel-title {
+    margin-bottom: 4px;
+    color: #0f172a;
+    font-size: 23px;
+    font-weight: 850;
+    letter-spacing: -.35px;
+}
+
+.panel-sub {
+    margin-bottom: 18px;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+/* ---------- Streamlit form controls ---------- */
+.login-panel [data-testid="stTextInput"] label {
+    color: #334155 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+}
+
+.login-panel input {
+    border-radius: 11px !important;
+    border: 1px solid #dbe3ee !important;
+    background: #f8fafc !important;
+    min-height: 45px !important;
+}
+
+.login-panel input:focus {
+    border-color: #60a5fa !important;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.10) !important;
+}
+
+.login-panel .stButton > button {
+    min-height: 46px !important;
+    border: 0 !important;
+    border-radius: 11px !important;
+    font-weight: 800 !important;
+    box-shadow: 0 8px 18px rgba(37,99,235,.16);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.login-panel .stButton > button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 11px 24px rgba(37,99,235,.22);
+}
+
+/* ---------- Credentials ---------- */
+.cred-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.cred {
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    background: linear-gradient(180deg,#ffffff,#f8fafc);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.cred:hover {
+    transform: translateY(-2px);
+    border-color: #cbdcf5;
+    box-shadow: 0 8px 22px rgba(15,23,42,.06);
+}
+
+.cred b {
+    display: block;
+    margin-bottom: 7px;
+    color: #0f172a;
+    font-size: 12px;
+}
+
+.cred span {
+    color: #1d4ed8;
+    font: 700 12px ui-monospace, SFMono-Regular, Consolas, monospace;
+    line-height: 1.8;
+}
+
+/* ---------- Feature cards ---------- */
+.feature {
+    margin-bottom: 9px;
+    padding: 15px 16px;
+    border: 1px solid #e5eaf1;
+    border-radius: 14px;
+    background: #fbfcfe;
+    transition: transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.feature:hover {
+    transform: translateY(-2px);
+    border-color: #d3e0f2;
+    box-shadow: 0 7px 20px rgba(15,23,42,.05);
+}
+
+.feature:last-child {
+    margin-bottom: 0;
+}
+
+.feature b {
+    color: #0f172a;
+    font-size: 14px;
+}
+
+.feature p {
+    margin: 5px 0 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+/* ---------- Repository CTA ---------- */
+.repo {
+    margin-top: 12px;
+    padding: 17px;
+    border-radius: 15px;
+    background: linear-gradient(135deg,#0f172a,#1e293b);
+    box-shadow: 0 10px 25px rgba(15,23,42,.12);
+}
+
+.repo b {
+    color: #fff;
+    font-size: 14px;
+}
+
+.repo p {
+    margin: 5px 0 0;
+    color: #cbd5e1;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ---------- GitHub / Excel buttons ---------- */
+.portfolio-shell .stLinkButton > a {
+    min-height: 44px;
+    border-radius: 11px !important;
+    font-weight: 750 !important;
+}
+
+/* ---------- Dashboard metrics ---------- */
+[data-testid="stMetric"] {
+    min-width: 0 !important;
+    overflow: visible !important;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    background: #f8fafc;
-    margin-bottom: 10px;
-}
-.credential-role { font-weight: 750; color: #0f172a; margin-bottom: 6px; }
-.credential-line { font-size: 13px; color: #475569; line-height: 1.55; }
-.credential-line code {
-    background: #e2e8f0;
-    padding: 2px 7px;
-    border-radius: 6px;
-    color: #0f172a;
-}
-
-.feature-card {
-    min-height: 125px;
-    padding: 21px;
-    border: 1px solid #e2e8f0;
-    border-radius: 18px;
-    background: white;
-    box-shadow: 0 8px 25px rgba(15,23,42,.06);
-}
-.feature-icon { font-size: 27px; }
-.feature-title { font-weight: 750; color: #0f172a; margin: 7px 0 4px; }
-.feature-text { font-size: 13px; color: #64748b; line-height: 1.5; }
-
-.section-label {
-    color: #2563eb;
-    font-size: 13px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 5px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 7px 22px rgba(15,23,42,.045);
 }
 
 [data-testid="stMetricValue"] {
     font-size: 28px !important;
-    font-weight: 750 !important;
+    line-height: 1.15 !important;
+    font-weight: 800 !important;
     white-space: nowrap !important;
     overflow: visible !important;
     text-overflow: clip !important;
 }
-[data-testid="stMetric"] {
+
+/* ---------- Tables / expanders ---------- */
+[data-testid="stDataFrame"] {
+    border-radius: 14px;
+    overflow: hidden;
     border: 1px solid #e2e8f0;
-    border-radius: 16px;
-    padding: 15px;
-    background: white;
-    box-shadow: 0 6px 20px rgba(15,23,42,.05);
 }
-.stButton > button {
-    border-radius: 11px;
-    font-weight: 700;
-    min-height: 44px;
+
+[data-testid="stExpander"] {
+    border-radius: 13px !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 900px) {
+    [data-testid="stAppViewContainer"] .main .block-container {
+        padding-top: .8rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+
+    .hero {
+        padding: 28px 24px;
+        border-radius: 21px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+        letter-spacing: -.8px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 23px !important;
+    }
+}
+
+@media (max-width: 650px) {
+    .portfolio-shell {
+        padding-bottom: 20px;
+    }
+
+    .hero {
+        padding: 24px 20px;
+    }
+
+    .hero:after {
+        right: 12px;
+        font-size: 80px;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .hero p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .cred-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-panel,
+    .feature-panel {
+        padding: 19px;
+        border-radius: 17px;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 20px !important;
+    }
 }
